@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main class="text-weather-primary">
-    <h1 class="text-red-500 p-5">Home</h1>
-  </main>
+  <section>
+    <h1 class="text-red-400">Home</h1>
+  </section>
 </template>
