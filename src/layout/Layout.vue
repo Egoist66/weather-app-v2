@@ -6,7 +6,7 @@
 <template>
     <div id="app-layout" class="flex flex-col min-h-screen bg-weather-primary">
 
-        <header v-if="$slots.header">
+        <header class="sticky top-0 bg-weather-primary shadow-lg" v-if="$slots.header">
             <slot name="header" />
         </header>
 

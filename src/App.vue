@@ -10,10 +10,18 @@ import Layout from "./layout/Layout.vue";
       <NavBar />
     </template>
 
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </Layout>
 
 
 </template>
 
-<style scoped></style>
+<style scoped>
+
+ 
+
+</style>
