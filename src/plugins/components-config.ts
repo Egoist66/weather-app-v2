@@ -1,4 +1,3 @@
-import { appLinks } from "@/router/links/links";
 import type { Plugin } from "vue";
 
 

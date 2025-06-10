@@ -10,7 +10,8 @@ import { componentsConfig } from "./plugins/components-config";
 
 const app = createApp(App);
 
-app.use(createPinia())
+app
+.use(createPinia())
 .use(router)
 .use(componentsConfig())
 .mount("#app");
