@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSearch } from "../../composables/useSearch";
-import { useCityView } from '../../composables/useCityView';
+import { useCityView } from "../../composables/useCityView";
 
 const {
   search: searchQuery,
@@ -10,9 +10,8 @@ const {
   isSearching,
 } = useSearch();
 
-
-const {previewCity} = useCityView()
-const location = document.location
+const { previewCity, redirectToCityViewAsLink } = useCityView();
+const location = document.location;
 </script>
 
 <template>
@@ -60,12 +59,18 @@ const location = document.location
         <template v-if="weatherStore.searchGeoResults?.features.length">
           <li
             role="link"
-            class="py-2 cursor-pointer hover:text-gray-200 duration-300"
+            class="py-2 cursor-pointer hover:text-gray-200 duration-300 hover:underline"
             v-for="(result, i) in weatherStore.searchGeoResults?.features"
             :data-id="result.id"
-            :data-raw-link="`${location}weather/${result.place_name}/${result.context[i]?.text}`.trim()"
             :key="result.id"
-            @click="previewCity(result)"
+            @contextmenu.shift="
+              previewCity(result).then((data) =>
+                redirectToCityViewAsLink(
+                  `${location}weather/${data.params.state}/${data.params.city}?lat=${data.query.lat}&lng=${data.query.lng}&preview=${data.query.preview}`.trim()
+                )
+              )
+            "
+            @click="previewCity(result, false)"
           >
             {{ result?.place_name }}
           </li>

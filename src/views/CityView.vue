@@ -1,22 +1,20 @@
-
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
+import City from "@/components/ui/City.vue";
 
-
-const route = useRoute()
-
+const route = useRoute();
 </script>
 
-
 <template>
-    <section>
+  <section>
+    <Suspense @fallback="() => console.log('loading...')">
+      <template #fallback>
+        <p>Loading....</p>
+      </template>
 
-        {{ route.params }}
-
-    </section>
+      <City />
+    </Suspense>
+  </section>
 </template>
 
-
-<style scoped>
-
-</style>
+<style scoped></style>

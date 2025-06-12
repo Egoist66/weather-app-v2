@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { shallowRef } from "vue";
 import AppInfo from "../ui/AppInfo.vue";
-import BaseModal from "../ui/BaseModal.vue";
+import InfoModal from "../ui/InfoModal.vue";
 
 const isModalVisible = shallowRef<boolean>(false);
 const toggleModal = (value: boolean) => {
@@ -27,9 +27,9 @@ const toggleModal = (value: boolean) => {
       ></i>
     </div>
 
-    <BaseModal :is-modal-visible="isModalVisible" @close-modal="toggleModal(false)">
+    <InfoModal :is-modal-visible="isModalVisible" @close-modal="toggleModal(false)">
       <AppInfo />
-    </BaseModal>
+    </InfoModal>
   </nav>
 </template>
 
