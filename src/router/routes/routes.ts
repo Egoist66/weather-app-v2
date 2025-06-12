@@ -8,10 +8,11 @@ export default [
     component: () => import("@/views/HomeView.vue"),
   },
   {
-    path: "/about",
-    name: "about",
+    path: "/weather/:state/:city",
+    name: "city-view",
+    
     //@ts-ignore
 
-    component: () => import("@/views/AboutView.vue"),
+    component: () => import("@/views/CityView.vue"),
   },
 ] as RouterOptions["routes"];

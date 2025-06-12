@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import Search from '@/components/ui/Search.vue';
+
 </script>
 
 <template>
   <section>
-    <h1 class="text-red-400">Home</h1>
+    <Search />
   </section>
 </template>

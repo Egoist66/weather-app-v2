@@ -10,12 +10,14 @@
             <slot name="header" />
         </header>
 
-        <main>
+        <main class="container text-white">
             <slot name="default" />
         </main>
 
     </div>
 </template>
 <style scoped>
-
+    header {
+        z-index: 2;
+    }
 </style>
