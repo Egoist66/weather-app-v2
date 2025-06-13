@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
 import City from "@/components/ui/City.vue";
+import Preloader from "@/components/shared/Preloader.vue";
 
-const route = useRoute();
 </script>
 
 <template>
   <section>
-    <Suspense @fallback="() => console.log('loading...')">
-      <template #fallback>
-        <p>Loading....</p>
-      </template>
-
+    <Suspense @fallback="() => console.log('Loading...')">
       <City />
+
+      <template #fallback>
+        <Preloader :size="90" :stroke-width="3" />
+      </template>
     </Suspense>
   </section>
 </template>

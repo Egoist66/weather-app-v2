@@ -47,13 +47,13 @@ export const useWeather = async () => {
     }
   };
 
-  onMounted(async () => {
-    await getWeatherData();
-  });
+  await getWeatherData();
+  
 
   return {
     weatherStore,
     isWeatherLoading,
     isWeatherLoadingError,
+    route
   };
 };
