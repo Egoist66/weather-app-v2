@@ -121,13 +121,14 @@ const isPreviewOn = route.query.preview === "true";
 
             <div class="flex gap-2 flex-1 justify-end">
               <p class="text-daily">
-                <span>{{ route.query.lang === "ru" ? "Макс" : "Max" }} - </span>{{ Math.round(day.temp.max!) || 'N/A' }}&deg;
+                <span>{{ route.query.lang === "ru" ? "Макс" : "Max" }} - </span
+                >{{ Math.round(day.temp.max!) || 'N/A' }}&deg;
               </p>
               <p class="text-daily">
-                <span>{{ route.query.lang === "ru" ? "Мин" : "Min" }} - </span>{{ Math.round(day.temp.min!) || 'N/A' }}&deg;
+                <span>{{ route.query.lang === "ru" ? "Мин" : "Min" }} - </span
+                >{{ Math.round(day.temp.min!) || 'N/A' }}&deg;
               </p>
             </div>
-
           </li>
         </ul>
       </div>
