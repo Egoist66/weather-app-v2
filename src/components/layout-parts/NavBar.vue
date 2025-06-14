@@ -7,6 +7,9 @@ const isModalVisible = shallowRef<boolean>(false);
 const toggleModal = (value: boolean) => {
   isModalVisible.value = value;
 };
+
+
+
 </script>
 
 <template>

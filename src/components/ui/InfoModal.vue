@@ -1,18 +1,27 @@
 <script setup lang="ts">
-import { useEventListener } from '@vueuse/core';
-
-
-
+import { useEventListener } from "@vueuse/core";
+import { watch } from "vue";
 
 const emit = defineEmits<{ (e: "close-modal"): void }>();
-defineProps<{ isModalVisible: boolean }>();
-
+const { isModalVisible } = defineProps<{ isModalVisible: boolean }>();
 
 useEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     emit("close-modal");
   }
-})
+});
+
+watch(
+  () => isModalVisible,
+  (value) => {
+    if (value) {
+      document.documentElement.classList.add("overflow-hidden");
+    } else {
+      document.documentElement.classList.remove("overflow-hidden");
+    }
+  },
+  { deep: false, immediate: true }
+);
 
 const lang = new Intl.DateTimeFormat().resolvedOptions().locale;
 </script>
@@ -22,9 +31,9 @@ const lang = new Intl.DateTimeFormat().resolvedOptions().locale;
       <div
         v-if="isModalVisible"
         @click.self.prevent="$emit('close-modal')"
-        class="absolute w-full bg-black bg-opacity-50 backdrop-blur-sm h-screen top-0 left-0 flex justify-center px-8"
+        class="absolute w-full bg-black bg-opacity-50 backdrop-blur-sm h-screen items-center top-0 left-0 flex justify-center px-8"
       >
-        <div v-if="$slots.default" class="p-4 bg-white rounded-md  self-start mt-32 max-w-screen-md">
+        <div v-if="$slots.default" class="p-4 bg-white rounded-md max-w-screen-md">
           <slot name="default"> Default Content </slot>
 
           <div class="flex justify-end pt-8">

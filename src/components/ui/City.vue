@@ -70,7 +70,7 @@ const isPreviewOn = route.query.preview === "true";
             <p class="whitespace-nowrap text-md">
               {{ new Date(hour.currentTime!)
                 .toLocaleString(
-                  route.query.lang as string, 
+                  (route.query.lang as string ) ?? 'en-US', 
                   { hour: 'numeric', minute: 'numeric'}
                 )
 
@@ -89,17 +89,58 @@ const isPreviewOn = route.query.preview === "true";
       </div>
     </div>
 
-
     <hr class="border-white border-opacity-10 border w-full" />
 
+    <!-- Weekly Weather -->
+    <div class="max-w-screen-md w-full p-12">
+      <div class="mx-8 text-white">
+        <h2 class="text-xl pb-5">
+          {{ route.query.lang === "ru" ? "Погода на неделю" : "Weather by week" }}
+        </h2>
+        <ul>
+          <li
+            class="flex items-center"
+            v-for="day in weatherStore.weatherData?.daily"
+            :key="day.dt"
+          >
+            <p class="flex-1 text-daily">
+              {{ new Date(day.dt * 1000)
+                .toLocaleString(
+                  (route.query.lang as string ) ?? 'en-US', 
+                  { weekday: 'long' }
+                )
 
+              }}
+            </p>
 
+            <img
+              class="w-auto h-[50px] object-cover"
+              :src="`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`"
+              :alt="day.weather[0].description"
+            />
+
+            <div class="flex gap-2 flex-1 justify-end">
+              <p class="text-daily">
+                <span>{{ route.query.lang === "ru" ? "Макс" : "Max" }} - </span>{{ Math.round(day.temp.max!) || 'N/A' }}&deg;
+              </p>
+              <p class="text-daily">
+                <span>{{ route.query.lang === "ru" ? "Мин" : "Min" }} - </span>{{ Math.round(day.temp.min!) || 'N/A' }}&deg;
+              </p>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+p {
+  text-align: center;
+}
 
- p {
-  text-align:  center;
- }
+p.text-daily {
+  text-align: left;
+}
 </style>
