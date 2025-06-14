@@ -11,7 +11,7 @@ const isPreviewOn = route.query.preview === "true";
   <div class="flex flex-col flex-1 items-center">
     <!-- Banner -->
     <div
-      v-if="isPreviewOn"
+      v-if="route.query.preview && isPreviewOn"
       class="text-white p-4 bg-weather-secondary rounded-md shadow-md w-full text-center"
     >
       <p v-if="route.query.lang === 'ru'">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useEventListener } from "@vueuse/core";
+import { computed } from "vue";
 import { watch } from "vue";
 import { useRoute } from 'vue-router';
 
@@ -25,6 +26,8 @@ watch(
 );
 
 const lang = useRoute().query.lang as string
+
+const closeText = computed(() => lang === "ru" ? "Закрыть" : "Close")
 </script>
 <template>
   <Teleport to="body">
@@ -42,7 +45,7 @@ const lang = useRoute().query.lang as string
               class="bg-weather-primary py-2 px-4 rounded-md text-white hover:bg-weather-secondary duration-150"
               @click="$emit('close-modal')"
             >
-              {{ lang === "ru" ? "Закрыть" : "Close" }}
+              {{ closeText }}
             </button>
           </div>
         </div>

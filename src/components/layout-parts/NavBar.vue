@@ -2,13 +2,14 @@
 import { shallowRef } from "vue";
 import AppInfo from "../ui/AppInfo.vue";
 import InfoModal from "../ui/InfoModal.vue";
+import { useCities } from '../../composables/useCities';
 
 const isModalVisible = shallowRef<boolean>(false);
 const toggleModal = (value: boolean) => {
   isModalVisible.value = value;
 };
 
-
+const {addCity} = useCities()
 
 </script>
 
@@ -25,7 +26,12 @@ const toggleModal = (value: boolean) => {
         @click="toggleModal(true)"
         class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"
       ></i>
+
+      <!-- @vue-ignore -->
       <i
+        
+        v-if="$route.query.preview"
+        @click="addCity"
         class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
       ></i>
     </div>

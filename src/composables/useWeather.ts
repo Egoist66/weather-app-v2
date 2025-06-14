@@ -5,6 +5,15 @@ import axios from "axios";
 import { shallowRef } from "vue";
 import { useRoute } from "vue-router";
 
+/**
+ * Composable that fetches weather data from the OpenWeatherMap API.
+ *
+ * @returns An object with the following properties:
+ *   - `weatherStore`: The weather store.
+ *   - `isWeatherLoading`: A shallow ref of type `boolean` indicating whether the weather data is currently being fetched.
+ *   - `isWeatherLoadingError`: A shallow ref of type `boolean` indicating whether an error occurred when fetching the weather data.
+ *   - `route`: The current route.
+ */
 export const useWeather = async () => {
   const route = useRoute();
   const weatherStore = useWeatherStore();
