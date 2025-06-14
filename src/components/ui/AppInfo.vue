@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const lang = navigator.language.toLowerCase();
+const lang = new Intl.DateTimeFormat().resolvedOptions().locale;
 </script>
 
 <template>
   <div class="text-black">
-    <template v-if="lang === 'en-us'">
+    <template v-if="lang === 'en'">
       <h1 class="text-2xl mb-1">About:</h1>
       <p class="mb-4">
         The Local Weather allows you to track the current and future weather of cities of
@@ -28,7 +28,7 @@ const lang = navigator.language.toLowerCase();
         page. At the bottom of the page, there will be am option to delete the city.
       </p>
     </template>
-    <template v-else-if="lang === 'ru-ru'">
+    <template v-else-if="lang === 'ru'">
       <h1 class="text-2xl mb-1">О приложении:</h1>
       <p class="mb-4">
         "Local Weather" позволяет отслеживать текущую и прогнозируемую погоду в выбранных вами городах.

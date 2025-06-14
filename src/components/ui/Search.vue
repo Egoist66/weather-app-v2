@@ -12,13 +12,14 @@ const {
 
 const { previewCity, redirectToCityViewAsLink } = useCityView();
 const location = document.location;
-const locale = navigator.language.toLowerCase();
+const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
 </script>
 
 <template>
-  <div class="search-bar pt-2 mb-8 relative">
+  <div class="search-bar  max-w-[860px] mx-auto pt-2 mb-8 relative">
     <input
-      :placeholder="locale === 'ru-ru' ? 'Поиск по городу или штату' : 'Search for a city or state'"
+      autofocus
+      :placeholder="locale === 'ru' ? 'Поиск по городу или стране' : 'Search for a city or state'"
       :data-value="searchQuery"
       v-model.trim="searchQuery"
       type="search"
@@ -40,19 +41,19 @@ const locale = navigator.language.toLowerCase();
       v-if="isSearching"
       class="absolute top-[66px] bg-weather-secondary text-center text-xl rounded-md text-white w-full shadow-md p-2"
     >
-      {{ locale === "ru-ru" ? "Поиск..." : "Searching..." }}
+      {{ locale === "ru" ? "Поиск..." : "Searching..." }}
     </p>
 
     <p
       class="p-2 w-full text-xl absolute top-[66px] shadow-md rounded-md bg-red-400 text-white"
       v-if="searchError"
     >
-      Some error with fetching data
+      {{  locale === "ru" ? "Ошибка поиска" : "Search error" }}
     </p>
 
     <template v-else>
       <TransitionGroup
-        v-if="weatherStore.searchGeoResults"
+        v-if="weatherStore.searchGeoResults && !isSearching && !searchError"
         name="list"
         tag="ul"
         class="absolute top-[66px] bg-weather-secondary rounded-md text-white w-full shadow-md p-2"
@@ -77,7 +78,9 @@ const locale = navigator.language.toLowerCase();
           </li>
         </template>
         <template v-else>
-          <li>No results found - try a different search term</li>
+          <li>
+            {{ locale === "ru" ? "Ничего не найдено 😔 - попробуйте ещё" : "Nothing found - try again" }}
+          </li>
         </template>
       </TransitionGroup>
     </template>

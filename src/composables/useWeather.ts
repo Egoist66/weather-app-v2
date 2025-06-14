@@ -9,15 +9,14 @@ export const useWeather = async () => {
   const route = useRoute();
   const weatherStore = useWeatherStore();
 
-
-
   const isWeatherLoading = shallowRef<boolean>(false);
   const isWeatherLoadingError = shallowRef<boolean>(false);
 
-
   const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${
     route.query.lat
-  }&lon=${route.query.lng}&lang=${route.query.lang}&appid=${import.meta.env.VITE_APP_WEATHER_API_KEY}`;
+  }&lon=${route.query.lng}&lang=${route.query.lang}&units=metric&appid=${
+    import.meta.env.VITE_APP_WEATHER_API_KEY
+  }`;
 
   const getWeatherData = async () => {
     try {
@@ -28,7 +27,6 @@ export const useWeather = async () => {
       const { data } = await axios.get<WeatherRoot>(apiUrl);
 
       if (data) {
-
         data.currentTime = new Date(data.current.dt * 1000).getTime();
         data.hourly.forEach((h) => {
           h.currentTime = new Date(h.dt * 1000).getTime();
@@ -46,13 +44,15 @@ export const useWeather = async () => {
     }
   };
 
+
   await getWeatherData();
-  
+
+ 
 
   return {
     weatherStore,
     isWeatherLoading,
     isWeatherLoadingError,
-    route
+    route,
   };
 };

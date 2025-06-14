@@ -14,7 +14,7 @@ useEventListener("keydown", (event) => {
   }
 })
 
-const lang = navigator.language.toLowerCase();
+const lang = new Intl.DateTimeFormat().resolvedOptions().locale;
 </script>
 <template>
   <Teleport to="body">
@@ -32,7 +32,7 @@ const lang = navigator.language.toLowerCase();
               class="bg-weather-primary py-2 px-4 rounded-md text-white hover:bg-weather-secondary duration-150"
               @click="$emit('close-modal')"
             >
-              {{ lang === "ru-ru" ? "Закрыть" : "Close" }}
+              {{ lang === "ru" ? "Закрыть" : "Close" }}
             </button>
           </div>
         </div>
