@@ -12,12 +12,13 @@ const {
 
 const { previewCity, redirectToCityViewAsLink } = useCityView();
 const location = document.location;
+const locale = navigator.language.toLowerCase();
 </script>
 
 <template>
   <div class="search-bar pt-2 mb-8 relative">
     <input
-      placeholder="Search for a city or state"
+      :placeholder="locale === 'ru-ru' ? 'Поиск по городу или штату' : 'Search for a city or state'"
       :data-value="searchQuery"
       v-model.trim="searchQuery"
       type="search"
@@ -39,7 +40,7 @@ const location = document.location;
       v-if="isSearching"
       class="absolute top-[66px] bg-weather-secondary text-center text-xl rounded-md text-white w-full shadow-md p-2"
     >
-      Loading...
+      {{ locale === "ru-ru" ? "Поиск..." : "Searching..." }}
     </p>
 
     <p

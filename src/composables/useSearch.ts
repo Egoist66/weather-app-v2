@@ -18,6 +18,7 @@ export const useSearch = () => {
 
   const weatherStore = useWeatherStore();
 
+
   const search = shallowRef<string>("");
   const searchError = shallowRef<boolean>(false);
   const searchUrl = shallowRef<string>(

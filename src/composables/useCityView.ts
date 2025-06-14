@@ -22,6 +22,7 @@ export const useCityView = () => {
         query: {
           lat: result.geometry.coordinates[1],
           lng: result.geometry.coordinates[0],
+          lang: new Intl.DateTimeFormat().resolvedOptions().locale,
           preview: true.toString(),
         },
       });

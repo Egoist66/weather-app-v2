@@ -14,15 +14,15 @@ useEventListener("keydown", (event) => {
   }
 })
 
-
+const lang = navigator.language.toLowerCase();
 </script>
 <template>
   <Teleport to="body">
     <Transition name="fade">
       <div
         v-if="isModalVisible"
-        @click="$emit('close-modal')"
-        class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8"
+        @click.self.prevent="$emit('close-modal')"
+        class="absolute w-full bg-black bg-opacity-50 backdrop-blur-sm h-screen top-0 left-0 flex justify-center px-8"
       >
         <div v-if="$slots.default" class="p-4 bg-white rounded-md  self-start mt-32 max-w-screen-md">
           <slot name="default"> Default Content </slot>
@@ -32,7 +32,7 @@ useEventListener("keydown", (event) => {
               class="bg-weather-primary py-2 px-4 rounded-md text-white hover:bg-weather-secondary duration-150"
               @click="$emit('close-modal')"
             >
-              Close
+              {{ lang === "ru-ru" ? "Закрыть" : "Close" }}
             </button>
           </div>
         </div>
