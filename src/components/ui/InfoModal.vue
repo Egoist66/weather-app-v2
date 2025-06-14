@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useEventListener } from "@vueuse/core";
 import { watch } from "vue";
+import { useRoute } from 'vue-router';
 
 const emit = defineEmits<{ (e: "close-modal"): void }>();
 const { isModalVisible } = defineProps<{ isModalVisible: boolean }>();
@@ -23,7 +24,7 @@ watch(
   { deep: false, immediate: true }
 );
 
-const lang = new Intl.DateTimeFormat().resolvedOptions().locale;
+const lang = useRoute().query.lang as string
 </script>
 <template>
   <Teleport to="body">
