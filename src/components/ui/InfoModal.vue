@@ -2,7 +2,7 @@
 import { useEventListener } from "@vueuse/core";
 import { computed } from "vue";
 import { watch } from "vue";
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 
 const emit = defineEmits<{ (e: "close-modal"): void }>();
 const { isModalVisible } = defineProps<{ isModalVisible: boolean }>();
@@ -24,10 +24,6 @@ watch(
   },
   { deep: false, immediate: true }
 );
-
-const lang = useRoute().query.lang as string
-
-const closeText = computed(() => lang === "ru" ? "Закрыть" : "Close")
 </script>
 <template>
   <Teleport to="body">
@@ -45,7 +41,7 @@ const closeText = computed(() => lang === "ru" ? "Закрыть" : "Close")
               class="bg-weather-primary py-2 px-4 rounded-md text-white hover:bg-weather-secondary duration-150"
               @click="$emit('close-modal')"
             >
-              {{ closeText }}
+              {{ useRoute().query.lang === "ru" ? "Закрыть" : "Close" }}
             </button>
           </div>
         </div>

@@ -20,6 +20,8 @@ export const useCitiesStore = defineStore("cities-store", () => {
         },
         state: route.params.state as string,
         city: route.params.city as string,
+        isPreviewOn: true,
+        isTracked: false,
         id: crypto.randomUUID(),
       });
   };

@@ -1,8 +1,6 @@
 import type { Feature } from "@/types/search-geo-api.types";
 import { useRouter } from "vue-router";
 
-
-
 /**
  * Composable that handles city view.
  *
@@ -17,8 +15,8 @@ import { useRouter } from "vue-router";
  *     in a new tab.
  */
 export const useCityView = () => {
-  
   const router = useRouter();
+
   const previewCity = async (result: Feature, omitRouterPush = true) => {
     const [city, region] = result.place_name.split(",");
     // @ts-ignore
@@ -41,21 +39,6 @@ export const useCityView = () => {
         },
       });
     }
-
-    return {
-      name: "city-view",
-      params: {
-        // @ts-ignore
-        state: state.trim().replaceAll(" ", "-"),
-        // @ts-ignore
-        city: city.trim().replaceAll(" ", "-"),
-      },
-      query: {
-        lat: result.geometry.coordinates[1],
-        lng: result.geometry.coordinates[0],
-        preview: true.toString(),
-      },
-    };
   };
 
   const redirectToCityViewAsLink = (link: string) => {

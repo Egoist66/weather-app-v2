@@ -6,4 +6,6 @@ export type Cities = {
     state: string;
     city: string;
     id: string;
+    isTracked?: boolean
+    isPreviewOn?: boolean
 }

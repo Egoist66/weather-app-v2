@@ -6,6 +6,7 @@ import { useCities } from '../../composables/useCities';
 
 const isModalVisible = shallowRef<boolean>(false);
 const toggleModal = (value: boolean) => {
+  window.scrollTo(0, 0);
   isModalVisible.value = value;
 };
 

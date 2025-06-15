@@ -10,16 +10,18 @@ const {
   isSearching,
 } = useSearch();
 
-const { previewCity, redirectToCityViewAsLink } = useCityView();
+const { previewCity } = useCityView();
 const location = document.location;
 const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
 </script>
 
 <template>
-  <div class="search-bar  max-w-[860px] mx-auto pt-2 mb-8 relative">
+  <div class="search-bar max-w-[860px] mx-auto pt-2 mb-8 relative">
     <input
       autofocus
-      :placeholder="locale === 'ru' ? 'Поиск по городу или стране' : 'Search for a city or state'"
+      :placeholder="
+        locale === 'ru' ? 'Поиск по городу или стране' : 'Search for a city or state'
+      "
       :data-value="searchQuery"
       v-model.trim="searchQuery"
       type="search"
@@ -48,7 +50,7 @@ const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
       class="p-2 w-full text-xl absolute top-[66px] shadow-md rounded-md bg-red-400 text-white"
       v-if="searchError"
     >
-      {{  locale === "ru" ? "Ошибка поиска" : "Search error" }}
+      {{ locale === "ru" ? "Ошибка поиска" : "Search error" }}
     </p>
 
     <template v-else>
@@ -65,13 +67,6 @@ const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
             v-for="(result, i) in weatherStore.searchGeoResults?.features"
             :data-id="result.id"
             :key="result.id"
-            @contextmenu.shift="
-              previewCity(result).then((data) =>
-                redirectToCityViewAsLink(
-                  `${location}weather/${data.params.state}/${data.params.city}?lat=${data.query.lat}&lng=${data.query.lng}&preview=${data.query.preview}`.trim()
-                )
-              )
-            "
             @click="previewCity(result, false)"
           >
             {{ result?.place_name }}
@@ -79,7 +74,11 @@ const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
         </template>
         <template v-else>
           <li>
-            {{ locale === "ru" ? "Ничего не найдено 😔 - попробуйте ещё" : "Nothing found - try again" }}
+            {{
+              locale === "ru"
+                ? "Ничего не найдено 😔 - попробуйте ещё"
+                : "Nothing found - try again"
+            }}
           </li>
         </template>
       </TransitionGroup>

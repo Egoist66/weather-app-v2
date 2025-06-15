@@ -15,6 +15,8 @@ export const useCities = () => {
   const route = useRoute();
   const router = useRouter();
 
+
+
   const addCity = () => {
     const isCityAlreadyAdded = citiesStore.cities.some(
       (c) => c.city === route.params.city && c.state === route.params.state
@@ -27,20 +29,25 @@ export const useCities = () => {
       delete query.preview;
       Swal.fire({
         icon: "success",
-        title: "City added",
+        title: route.query.lang === 'en' ? `City ${route.params.city}  added!` : `Город ${route.params.city} добавлен!`,
         toast: true,
         position: "top-right",
         showConfirmButton: false,
         showCloseButton: true,
-        timer: 1500,
+        timer: 1000,
         timerProgressBar: true,
       }).then(() => {
         router.replace({ query });
+        const foundCity = citiesStore.cities.find((c) => c.city === route.params.city)
+        if(foundCity){
+          foundCity.isPreviewOn = false
+          foundCity.isTracked = true
+        }
       });
     } else {
       Swal.fire({
         icon: "warning",
-        title: `City - ${route.params.city} already added!`,
+        title: route.query.lang === 'en' ? `City ${route.params.city} already added!` : `Город ${route.params.city} уже добавлен!`,
         toast: true,
         showCloseButton: true,
         position: "top-right",

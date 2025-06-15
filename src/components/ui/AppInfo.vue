@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 
-const lang = useRoute().query.lang as string
+const lang = useRoute().query.lang as string || navigator.language
 </script>
 
 <template>
   <div class="text-black">
-    <template v-if="lang === 'en'">
+    <template v-if="lang.startsWith('en')">
       <h1 class="text-2xl mb-1">About:</h1>
       <p class="mb-4">
         The Local Weather allows you to track the current and future weather of cities of
@@ -30,7 +30,7 @@ const lang = useRoute().query.lang as string
         page. At the bottom of the page, there will be am option to delete the city.
       </p>
     </template>
-    <template v-else-if="lang === 'ru'">
+    <template v-else-if="lang.startsWith('ru')">
       <h1 class="text-2xl mb-1">О приложении:</h1>
       <p class="mb-4">
         "Local Weather" позволяет отслеживать текущую и прогнозируемую погоду в выбранных вами городах.

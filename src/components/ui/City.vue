@@ -58,7 +58,7 @@ const isPreviewOn = route.query.preview === "true";
     <!-- Weather by hours -->
     <div class="max-w-screen-md w-full p-12">
       <div class="mx-8 text-white">
-        <h2 class="text-xl pb-5">
+        <h2 class="text-xl pb-5 font-bold">
           {{ route.query.lang === "ru" ? "Погода по часам" : "Weather by hours" }}
         </h2>
         <ul class="flex gap-10 overflow-x-scroll">
@@ -94,14 +94,15 @@ const isPreviewOn = route.query.preview === "true";
     <!-- Weekly Weather -->
     <div class="max-w-screen-md w-full p-12">
       <div class="mx-8 text-white">
-        <h2 class="text-xl pb-5">
+        <h2 class="text-xl pb-5 font-bold">
           {{ route.query.lang === "ru" ? "Погода на неделю" : "Weather by week" }}
         </h2>
         <ul>
           <li
-            class="flex items-center"
-            v-for="day in weatherStore.weatherData?.daily"
+            class="flex items-center p-2 rounded-md"
+            v-for="(day, index) in weatherStore.weatherData?.daily"
             :key="day.dt"
+            :class="{ 'bg-weather-secondary': index === 0 }"
           >
             <p class="flex-1 text-daily">
               {{ new Date(day.dt * 1000)
