@@ -30,5 +30,7 @@ export const useCitiesStore = defineStore("cities-store", () => {
     cities.value = cities.value.filter((c) => c.id !== id);
   };
 
-  return { cities, addCities, removeCities };
+  const clearCities = () => (cities.value = []);
+
+  return { cities, addCities, removeCities, clearCities };
 });
