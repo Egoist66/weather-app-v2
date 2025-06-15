@@ -33,7 +33,7 @@ const navigator = window.navigator
       <div
         v-if="isModalVisible"
         @click.self.prevent="$emit('close-modal')"
-        class="absolute w-full bg-black bg-opacity-50 backdrop-blur-sm h-screen items-center top-0 left-0 flex justify-center px-8"
+        class="absolute w-full z-30 bg-black bg-opacity-50 backdrop-blur-sm h-screen items-center top-0 left-0 flex justify-center px-8"
       >
         <div v-if="$slots.default" class="p-4 bg-white rounded-md max-w-screen-md">
           <slot name="default"> Default Content </slot>
