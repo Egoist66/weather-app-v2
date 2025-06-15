@@ -1,4 +1,5 @@
 import { useCitiesStore } from "@/stores/cities.store";
+import type { Cities } from "@/types/cities.types";
 import Swal from "sweetalert2";
 import { useRoute, useRouter } from "vue-router";
 
@@ -98,5 +99,19 @@ export const useCities = () => {
     });
   };
 
-  return { citiesStore, addCity, clearCities };
+  const removeCity = (city: Cities) => {
+    citiesStore.removeCities(city.id);
+    Swal.fire({
+      icon: "success",
+      title:
+        route.query.lang === "en" ? "City removed!" : "Город удален!",
+      toast: true,
+      position: "top-right",
+      showConfirmButton: false,
+      showCloseButton: true,
+      timer: 1500,
+      timerProgressBar: true,
+    });
+  }
+  return { citiesStore, addCity, clearCities, removeCity };
 };
