@@ -2,6 +2,7 @@
 import { useSearch } from "../../composables/useSearch";
 import { useCityView } from "../../composables/useCityView";
 
+
 const {
   search: searchQuery,
   weatherStore,
@@ -11,12 +12,15 @@ const {
 } = useSearch();
 
 const { previewCity } = useCityView();
-const location = document.location;
 const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
+
+
+
+
 </script>
 
 <template>
-  <div class="search-bar max-w-[860px] mx-auto pt-2 mb-8 relative">
+  <div class="search-bar mb-20 pt-2 relative">
     <input
       autofocus
       :placeholder="
@@ -41,7 +45,7 @@ const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
 
     <p
       v-if="isSearching"
-      class="absolute top-[66px] bg-weather-secondary text-center text-xl rounded-md text-white w-full shadow-md p-2"
+      class="absolute top-[66px] text-center text-xl rounded-md text-white w-full p-2"
     >
       {{ locale === "ru" ? "Поиск..." : "Searching..." }}
     </p>
@@ -58,7 +62,8 @@ const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
         v-if="weatherStore.searchGeoResults && !isSearching && !searchError"
         name="list"
         tag="ul"
-        class="absolute top-[66px] bg-weather-secondary rounded-md text-white w-full shadow-md p-2"
+        :class="{'bg-weather-secondary p-2 rounded-md shadow-md': weatherStore.searchGeoResults.features.length && !isSearching && !searchError}"
+        class="absolute top-[66px] pb-8  rounded-md text-white w-full py-2"
       >
         <template v-if="weatherStore.searchGeoResults?.features.length">
           <li

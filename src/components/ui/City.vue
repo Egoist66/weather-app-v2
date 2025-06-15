@@ -99,7 +99,7 @@ const isPreviewOn = route.query.preview === "true";
         </h2>
         <ul>
           <li
-            class="flex items-center p-2 rounded-md"
+            class="flex items-center weekly-weather-item p-2 rounded-md"
             v-for="(day, index) in weatherStore.weatherData?.daily"
             :key="day.dt"
             :class="{ 'bg-weather-secondary': index === 0 }"
@@ -138,6 +138,21 @@ const isPreviewOn = route.query.preview === "true";
 </template>
 
 <style scoped>
+
+@media (max-width: 450px) {
+  .weekly-weather-item {
+    display: block;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .weekly-weather-item div {
+    display: block;
+  }
+}
 p {
   text-align: center;
 }

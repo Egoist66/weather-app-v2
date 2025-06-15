@@ -24,6 +24,8 @@ watch(
   },
   { deep: false, immediate: true }
 );
+
+const navigator = window.navigator
 </script>
 <template>
   <Teleport to="body">
@@ -41,7 +43,7 @@ watch(
               class="bg-weather-primary py-2 px-4 rounded-md text-white hover:bg-weather-secondary duration-150"
               @click="$emit('close-modal')"
             >
-              {{ useRoute().query.lang === "ru" ? "Закрыть" : "Close" }}
+              {{ navigator.language.startsWith("ru") ? "Закрыть" : "Close" }}
             </button>
           </div>
         </div>

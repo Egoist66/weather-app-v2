@@ -1,4 +1,4 @@
-import { shallowRef, watch } from "vue";
+import { onUnmounted, shallowRef, watch } from "vue";
 import { useDebounceFn } from "@vueuse/core";
 import axios from "axios";
 import type { GeoRoot } from "@/types/search-geo-api.types";
@@ -44,6 +44,8 @@ export const useSearch = () => {
       isSearching.value = false;
 
       console.log(error);
+
+
     }
   };
 
@@ -77,7 +79,11 @@ export const useSearch = () => {
     },
     { deep: false }
   );
+  
 
+  onUnmounted(() => {
+    weatherStore.clearSearchGeoResults();
+  })
   return {
     search,
     searchUrl,

@@ -1,3 +1,6 @@
+import type { Main } from "./cities-list.types";
+import type { Weather } from "./weather-api.types";
+
 export type Cities = {
     coords: {
         lat: number;
@@ -8,4 +11,6 @@ export type Cities = {
     id: string;
     isTracked?: boolean
     isPreviewOn?: boolean
+    weather?: Weather[]
+    main?: Main
 }
