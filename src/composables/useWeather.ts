@@ -1,9 +1,11 @@
+import { useCitiesStore } from "@/stores/cities.store";
 import { useWeatherStore } from "@/stores/weather.store";
+import type { Cities } from "@/types/cities.types";
 import type { WeatherRoot } from "@/types/weather-api.types";
 import { delay } from "@/utils/delay";
 import axios from "axios";
 import { shallowRef } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 /**
  * Composable that fetches weather data from the OpenWeatherMap API.
@@ -16,7 +18,10 @@ import { useRoute } from "vue-router";
  */
 export const useWeather = async () => {
   const route = useRoute();
+  const router = useRouter();
+  
   const weatherStore = useWeatherStore();
+  const citiesStore = useCitiesStore();
 
   const isWeatherLoading = shallowRef<boolean>(false);
   const isWeatherLoadingError = shallowRef<boolean>(false);
@@ -57,11 +62,18 @@ export const useWeather = async () => {
   await getWeatherData();
 
  
+  const removeCity = async (city: Cities) => {
+    citiesStore.removeCities(city.id);
+
+    await router.push({ name: "home" });
+  };
 
   return {
     weatherStore,
     isWeatherLoading,
     isWeatherLoadingError,
+    removeCity,
+    citiesStore,
     route,
   };
 };

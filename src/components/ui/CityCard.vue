@@ -8,10 +8,10 @@ const navigator = window.navigator;
 </script>
 
 <template>
-  <div>
+  <div class="flex items-center card-wrapper gap-2">
     <div
       @click="$emit('clickToView')"
-      class="city-card flex py-6 cursor-pointer bg-weather-secondary rounded-md px-3"
+      class="city-card flex-1 flex py-6 cursor-pointer bg-weather-secondary rounded-md px-3"
     >
       <div class="flex flex-col flex-1">
         <h3 class="text-3xl">{{ city.city }}</h3>
@@ -32,14 +32,22 @@ const navigator = window.navigator;
         </div>
       </div>
     </div>
-    <div class="flex justify-center items-center p-2">
-      <i
+    <div class="p-2">
+           <i
         @click.self.prevent="$emit('delete-city', city)"
         :title="navigator.language.startsWith('ru') ? 'Удалить город' : 'Delete city'"
-        class="fa-solid fa-circle-xmark text-2xl hover:text-red-500 duration-150 cursor-pointer"
+        class="fa-solid fa-trash text-2xl hover:text-red-500 duration-150 cursor-pointer"
       ></i>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+  @media (max-width: 450px){
+    .card-wrapper{
+      flex-direction: column;
+    }
+  }
+
+</style>

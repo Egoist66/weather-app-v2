@@ -78,11 +78,11 @@ const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
           </li>
         </template>
         <template v-else>
-          <li>
+          <li class="text-orange-400">
             {{
               locale === "ru"
-                ? "Ничего не найдено 😔 - попробуйте ещё"
-                : "Nothing found - try again"
+                ? "Ничего не найдено 😔 - попробуйте ещё!"
+                : "Nothing found - try again!"
             }}
           </li>
         </template>

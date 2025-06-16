@@ -10,7 +10,7 @@ const lang = navigator.language;
 
 <template>
   <div v-if="savedCities.length" class="flex flex-col gap-4">
-    <div class="flex justify-between items-center flex-wrap">
+    <div class="flex justify-between items-center delete-controls">
       <h2 class="text-2xl mb-2">
         {{ lang.startsWith("ru") ? "Сохраненные города" : "Saved cities" }}
       </h2>
@@ -35,4 +35,12 @@ const lang = navigator.language;
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+  @media (max-width: 450px) {
+    .delete-controls {
+      flex-direction: column;
+    }
+  }
+
+</style>

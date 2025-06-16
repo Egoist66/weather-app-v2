@@ -2,9 +2,11 @@
 import { useWeather } from "../../composables/useWeather";
 import { timeFormatter } from "../../utils/time-formatter";
 
-const { weatherStore, route } = await useWeather();
+const { weatherStore, citiesStore,  route, removeCity } = await useWeather();
 
 const isPreviewOn = route.query.preview === "true";
+
+const foundCity = citiesStore.cities.find((c) => c.city === route.params.city);
 </script>
 
 <template>
@@ -134,11 +136,19 @@ const isPreviewOn = route.query.preview === "true";
         </ul>
       </div>
     </div>
+
+    <button
+      @click="removeCity(foundCity!)"
+      class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+    >
+  
+      <i class="fa-solid fa-trash"></i>
+      <p>{{ route.query.lang === "ru" ? "Удалить город" : "Remove city" }}</p>
+  </button>
   </div>
 </template>
 
 <style scoped>
-
 @media (max-width: 450px) {
   .weekly-weather-item {
     display: block;
@@ -147,6 +157,10 @@ const isPreviewOn = route.query.preview === "true";
   h2 {
     text-align: center;
     font-size: 18px;
+  }
+
+  h1 {
+    font-size: 30px;
   }
 
   .weekly-weather-item div {
