@@ -138,6 +138,7 @@ const foundCity = citiesStore.cities.find((c) => c.city === route.params.city);
     </div>
 
     <button
+      v-if="foundCity"
       @click="removeCity(foundCity!)"
       class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
     >
