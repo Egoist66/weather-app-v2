@@ -11,7 +11,8 @@ const navigator = window.navigator;
   <div class="flex items-center card-wrapper gap-2">
     <div
       @click="$emit('clickToView')"
-      class="city-card flex-1 flex py-6 cursor-pointer bg-weather-secondary rounded-md px-3"
+      :title="navigator.language.startsWith('ru') ? `Посмотреть детально о ${city.city}` : `View details about ${city.city}`"
+      class="city-card flex-1 flex py-6 cursor-pointer hover:scale-[1.0076] duration-300 bg-weather-secondary rounded-md px-3"
     >
       <div class="flex flex-col flex-1">
         <h3 class="text-3xl">{{ city.city }}</h3>

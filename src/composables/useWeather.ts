@@ -19,7 +19,7 @@ import { useRoute, useRouter } from "vue-router";
 export const useWeather = async () => {
   const route = useRoute();
   const router = useRouter();
-  
+
   const weatherStore = useWeatherStore();
   const citiesStore = useCitiesStore();
 
@@ -65,7 +65,7 @@ export const useWeather = async () => {
   const removeCity = async (city: Cities) => {
     citiesStore.removeCities(city.id);
 
-    await router.push({ name: "home" });
+    await router.replace({ name: "home" });
   };
 
   return {
