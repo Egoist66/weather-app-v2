@@ -19,6 +19,13 @@ if (isTMA()) {
       launchParams: retrieveLaunchParams(),
     });
     console.log("Telegram Mini App initialized!");
+
+    app
+      .use(createPinia())
+      .use(router)
+      .use(componentsConfig())
+      .use(initCitiesLSSaving())
+      .mount("#app");
   } catch (e) {
     console.error("TMA init error:", e);
   }
